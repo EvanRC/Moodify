@@ -1,19 +1,15 @@
+// server/middleware/auth.js
 const jwt = require('jsonwebtoken')
-const User = require('../models/User') // Adjusted path to User.js
 
-const authMiddleware = async (req, res, next) => {
+const authMiddleware = (req, res, next) => {
   try {
     const token = req.header('Authorization').replace('Bearer ', '')
-    const decoded = jwt.verify(token, 'your-secret-key')
-    const user = await User.findOne({ _id: decoded._id, 'tokens.token': token })
-    if (!user) {
-      throw new Error()
-    }
-    req.user = user
-    req.token = token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET) // Using JWT secret key from environment variable
+    // Attach user data to request for further processing
+    req.user = decoded
     next()
   } catch (error) {
-    res.status(401).send({ error: 'Please authenticate' })
+    res.status(401).json({ error: 'Unauthorized' })
   }
 }
 

@@ -1,21 +1,22 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './components/Home';
-import SpotifyAuth from './components/spotifyAuth'; 
-import Success from './components/Success'; 
-import Menu from './components/Menu';
+import React, { useContext } from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { AuthContext } from './contexts/authContext'
+import Signup from './components/signup'
+import Home from './components/Home'
 
-function App() {
+const App = () => {
+  const { isAuthenticated } = useContext(AuthContext)
+
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/spotify-auth" element={<SpotifyAuth />} />
-        <Route path="/success" element={<Success />} />
-        <Route path="/menu" element={<Menu />} />
-      </Routes>
+      <Switch>
+        <Route path="/signup">
+          <Signup />
+        </Route>
+        <Route path="/">{isAuthenticated ? <Home /> : <Signup />}</Route>
+      </Switch>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App
