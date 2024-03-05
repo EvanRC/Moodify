@@ -1,10 +1,11 @@
 import React from 'react';
 import { generateCodeVerifier, generateCodeChallenge } from '../utils/auth';
 
+
 const SpotifyAuth = () => {
   const handleLogin = async () => {
-    const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
-    const redirectUri = process.env.REACT_APP_SPOTIFY_REDIRECT_URI;
+    const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
+    const redirectUri = import.meta.env.VITE_SPOTIFY_REDIRECT_URI;
     const scope = 'user-read-private user-read-email';
     
     const verifier = generateCodeVerifier();
