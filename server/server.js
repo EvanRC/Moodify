@@ -27,11 +27,13 @@ app.post('/api/exchange-token', async (req, res) => {
   const clientId = process.env.SPOTIFY_CLIENT_ID;
   const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
   const redirectUri = process.env.SPOTIFY_REDIRECT_URI;
+  const codeVerifier = req.body.code_verifier;
 
   const formData = new URLSearchParams();
   formData.append('grant_type', 'authorization_code');
   formData.append('code', code);
   formData.append('redirect_uri', redirectUri);
+  formData.append('code_verifier', codeVerifier)
 
   try {
     const response = await axios.post('https://accounts.spotify.com/api/token', formData.toString(), {
@@ -41,11 +43,7 @@ app.post('/api/exchange-token', async (req, res) => {
       },
       
     });
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(`Spotify API error: ${data.error} - ${data.error_description}`);
-    }
+    const data = response.data;
 
     if (data.access_token) {
       res.json({ access_token: data.access_token });
