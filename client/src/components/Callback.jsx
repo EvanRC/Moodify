@@ -7,17 +7,24 @@ const Callback = () => {
   useEffect(() => {
     const code = new URLSearchParams(window.location.search).get('code');
     
+    const codeVerifier = localStorage.getItem('spotifyCodeVerifier')
+
     if (code) {
       fetch('/api/exchange-token', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: new URLSearchParams({ code }).toString()
+        body: new URLSearchParams({
+            code: code, 
+            code_verifier: codeVerifier
+          }).toString()
       })
       .then(response => response.json())
       .then(data => {
+        console.log('Data received:', data);
         if (data.access_token) {
+          console.log('Spotify Access Token:', data.access_token); // Log the token
           localStorage.setItem('spotifyAccessToken', data.access_token);
           navigate('/menu');
         } else {

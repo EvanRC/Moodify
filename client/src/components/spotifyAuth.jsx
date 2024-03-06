@@ -11,8 +11,6 @@ const SpotifyAuth = () => {
     const verifier = generateCodeVerifier();
     const challenge = await generateCodeChallenge(verifier);
     
-    sessionStorage.setItem('spotify_verifier', verifier);
-
     const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scope)}&code_challenge_method=S256&code_challenge=${challenge}`;
     
     window.location.href = authUrl;
