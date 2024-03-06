@@ -1,16 +1,16 @@
 const express = require('express');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
-const fetch = require('node-fetch');
 const btoa = (str) => Buffer.from(str).toString('base64')
-const path = require('path');
+const path = require('path')
+const axios = require('axios')
 const cors = require('cors');
 require('dotenv').config();
 
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 
-const PORT = process.env.PORT || 3006;
+const PORT = process.env.PORT || 3005;
 const app = express();
 
 app.use(cors());
@@ -34,13 +34,12 @@ app.post('/api/exchange-token', async (req, res) => {
   formData.append('redirect_uri', redirectUri);
 
   try {
-    const response = await fetch('https://accounts.spotify.com/api/token', {
-      method: 'POST',
+    const response = await axios.post('https://accounts.spotify.com/api/token', formData.toString(), {
       headers: {
         'Authorization': `Basic ${btoa(`${clientId}:${clientSecret}`)}`,
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      body: formData.toString()
+      
     });
     const data = await response.json();
 
