@@ -10,7 +10,7 @@ const db = require('./config/connection')
 const authMiddleware = require('./middleware/auth')
 
 // Define the port number
-const PORT = process.env.PORT || 3006
+const PORT = process.env.PORT || 3001
 
 // Create an Express app
 const app = express()

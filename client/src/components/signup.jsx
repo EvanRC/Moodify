@@ -1,7 +1,6 @@
-// Signup.jsx
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useAuth } from '../contexts/authContext'
+import { useAuth } from '../contexts/AuthContext'
 
 const Signup = () => {
   const [username, setUsername] = useState('')
@@ -11,10 +10,9 @@ const Signup = () => {
 
   const handleSignup = async () => {
     // Perform signup logic
-    // On successful signup, obtain JWT token
-    const token = 'your_jwt_token_here' // Replace with actual token
-    login(token)
-    history.push('/home')
+    const userData = { username, password } // Example user data
+    login(userData)
+    history.push('/')
   }
 
   return (

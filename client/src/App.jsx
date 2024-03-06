@@ -1,21 +1,21 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { AuthContext } from './contexts/authContext'
-import Signup from './components/signup'
+import { AuthProvider } from './contexts/AuthContext'
+import Signup from './components/Signup'
 import Home from './components/Home'
+import Login from './components/Login'
 
 const App = () => {
-  const { isAuthenticated } = useContext(AuthContext)
-
   return (
-    <Router>
-      <Switch>
-        <Route path="/signup">
-          <Signup />
-        </Route>
-        <Route path="/">{isAuthenticated ? <Home /> : <Signup />}</Route>
-      </Switch>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Switch>
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/" component={Home} />
+        </Switch>
+      </Router>
+    </AuthProvider>
   )
 }
 

@@ -1,36 +1,34 @@
-// client/src/components/Login.jsx
 import React, { useState } from 'react'
-import axios from 'axios'
+import { useHistory } from 'react-router-dom'
+import { useAuth } from '../contexts/AuthContext'
 
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const { login } = useAuth()
+  const history = useHistory()
 
   const handleLogin = async () => {
-    try {
-      const response = await axios.post('/login', { username, password })
-      const { token } = response.data
-      // Store token in local storage
-      localStorage.setItem('token', token)
-      // Redirect or perform other actions after successful login
-    } catch (error) {
-      console.error('Login failed:', error)
-    }
+    // Perform login logic
+    const userData = { username, password } // Example user data
+    login(userData)
+    history.push('/')
   }
 
   return (
     <div>
+      <h2>Login</h2>
       <input
         type="text"
+        placeholder="Username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
-        placeholder="Username"
       />
       <input
         type="password"
+        placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
       />
       <button onClick={handleLogin}>Login</button>
     </div>
