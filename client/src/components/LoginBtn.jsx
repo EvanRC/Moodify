@@ -20,7 +20,7 @@ const LoginBtn = () => {
   };
 
   return (
-    <div>
+    <div className='button-container'>
       <button className="neon-button" onClick={handleLoginClick}>Login with Spotify</button>
     </div>
   );

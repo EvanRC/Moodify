@@ -7,7 +7,7 @@ const Home = () => {
   return (
     
     <div className="home-container">
-      <h1>Welcome to Moodify!</h1>
+      <h1 className='button-header'>Login with spotify to get Started!</h1>
       <LoginBtn />
     </div>
   );
