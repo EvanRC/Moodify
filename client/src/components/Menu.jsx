@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { fetchSongsByGenre } from '../utils/spotifyApi';
-import WebPlayback from './WebPlayback'; // Import the WebPlayback component
+import WebPlayback from './WebPlayback';
 
 const Menu = () => {
     const [genre, setGenre] = useState('');
     const [songs, setSongs] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    
+    const [currentTrackUri, setCurrentTrackUri] = useState(null);
+
     const accessToken = localStorage.getItem('spotifyAccessToken');
   
     useEffect(() => {
@@ -18,6 +19,10 @@ const Menu = () => {
           .then(fetchedSongs => {
             setSongs(fetchedSongs);
             setLoading(false);
+            // Optionally set the first song as the current track to play
+            if (fetchedSongs.length > 0) {
+              setCurrentTrackUri(fetchedSongs[0].uri);
+            }
           })
           .catch(err => {
             setError(err.message);
@@ -25,11 +30,15 @@ const Menu = () => {
           });
       }
     }, [genre, accessToken]);
-  
+
     const handleGenreChange = (e) => {
       setGenre(e.target.value);
     };
-  
+
+    const handleSongClick = (uri) => {
+      setCurrentTrackUri(uri);
+    };
+
     return (
       <div className='home-container'>
         <h1 className='button-header'>Choose a Genre</h1>
@@ -37,13 +46,11 @@ const Menu = () => {
           <option value="">Select Genre</option>
           <option value="rock">Rock</option>
           <option value="pop">Pop</option>
-          <option value="rap">Rap</option>
-          <option value="country">Country</option>
-          <option value="alternative">Alternative</option>
+          {/* ...other options... */}
         </select>
 
         {/* Render the WebPlayback component */}
-        <WebPlayback token={accessToken} playlist={songs.map(song => song.uri)} />
+        <WebPlayback accessToken={accessToken} trackUri={currentTrackUri} />
 
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error}</p>}
@@ -52,13 +59,15 @@ const Menu = () => {
             <h2>Songs:</h2>
             <ul>
               {songs.map(song => (
-                <li key={song.id}>{song.name} by {song.artists[0].name}</li>
+                <li key={song.id} onClick={() => handleSongClick(song.uri)}>
+                  {song.name} by {song.artists[0].name}
+                </li>
               ))}
             </ul>
           </div>
         )}
       </div>
     );
-  };
-  
-  export default Menu;
+};
+
+export default Menu;
