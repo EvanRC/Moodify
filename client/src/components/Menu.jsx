@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { fetchSongsByGenre } from '../utils/spotifyApi';
-
 const Menu = () => {
     const [genre, setGenre] = useState('');
     const [songs, setSongs] = useState([]);
@@ -30,9 +29,9 @@ const Menu = () => {
     };
   
     return (
-      <div>
-        <h1>Choose a Genre</h1>
-        <select value={genre} onChange={handleGenreChange}>
+      <div className='home-container'>
+        <h1 className='button-header'>Choose a Genre</h1>
+        <select className="neon-button" value={genre} onChange={handleGenreChange}>
           <option value="">Select Genre</option>
           <option value="rock">Rock</option>
           <option value="pop">Pop</option>
