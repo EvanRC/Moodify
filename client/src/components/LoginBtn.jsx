@@ -7,7 +7,7 @@ const LoginBtn = () => {
   const handleLoginClick = async () => {
     const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
     const redirectUri = import.meta.env.VITE_SPOTIFY_REDIRECT_URI;
-    const scope = 'user-read-private user-read-email';
+    const scope = 'user-read-playback-position streaming user-read-playback-state user-read-private user-read-email user-modify-playback-state';
     
     const verifier = generateCodeVerifier();
     const challenge = await generateCodeChallenge(verifier);

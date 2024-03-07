@@ -1,9 +1,9 @@
 const express = require('express');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
-const btoa = (str) => Buffer.from(str).toString('base64')
-const path = require('path')
-const axios = require('axios')
+const btoa = (str) => Buffer.from(str).toString('base64');
+const path = require('path');
+const axios = require('axios');
 const cors = require('cors');
 require('dotenv').config();
 
@@ -33,7 +33,7 @@ app.post('/api/exchange-token', async (req, res) => {
   formData.append('grant_type', 'authorization_code');
   formData.append('code', code);
   formData.append('redirect_uri', redirectUri);
-  formData.append('code_verifier', codeVerifier)
+  formData.append('code_verifier', codeVerifier);
 
   try {
     const response = await axios.post('https://accounts.spotify.com/api/token', formData.toString(), {
@@ -41,7 +41,6 @@ app.post('/api/exchange-token', async (req, res) => {
         'Authorization': `Basic ${btoa(`${clientId}:${clientSecret}`)}`,
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      
     });
     const data = response.data;
 
@@ -52,6 +51,31 @@ app.post('/api/exchange-token', async (req, res) => {
     }
   } catch (error) {
     console.error('Error during token exchange:', error);
+    res.status(500).json({ error: 'Internal Server Error', message: error.message });
+  }
+});
+
+app.post('/api/start-playback', async (req, res) => {
+  const accessToken = req.headers.authorization;
+  const deviceId = req.body.device_id;
+  const trackUri = req.body.uris;
+
+  try {
+    const response = await axios.put(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`,
+      {
+        uris: [trackUri]
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+
+    res.status(200).send('Playback started');
+  } catch (error) {
+    console.error('Error starting playback:', error);
     res.status(500).json({ error: 'Internal Server Error', message: error.message });
   }
 });

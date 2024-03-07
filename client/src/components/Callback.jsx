@@ -29,12 +29,10 @@ const Callback = () => {
           navigate('/menu');
         } else {
           console.error('No access token returned from Spotify');
-          alert('An error occurred while logging in to Spotify. Please try again.');
         }
       })
       .catch(error => {
         console.error('Error during token exchange:', error);
-        alert('An error occurred while logging in to Spotify. Please try again.');
       });
     }
   }, [navigate]);
