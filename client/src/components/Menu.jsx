@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchSongsByGenre } from '../utils/spotifyApi';
+import WebPlayback from './WebPlayback'; // Import the WebPlayback component
+
 const Menu = () => {
     const [genre, setGenre] = useState('');
     const [songs, setSongs] = useState([]);
@@ -39,7 +41,10 @@ const Menu = () => {
           <option value="country">Country</option>
           <option value="alternative">Alternative</option>
         </select>
-  
+
+        {/* Render the WebPlayback component */}
+        <WebPlayback token={accessToken} playlist={songs.map(song => song.uri)} />
+
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error}</p>}
         {songs.length > 0 && (
