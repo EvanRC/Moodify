@@ -24,7 +24,8 @@
     "node-fetch": "^3.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.11.2"
+    "react-router-dom": "^6.11.2",
+    "react-spotify-web-playback": "^0.14.3"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
