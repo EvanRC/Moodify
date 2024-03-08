@@ -50,7 +50,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #333;
+  background:transparent;
   color: #fff;
   padding: 0.5rem 1rem;
   padding-bottom: 1.5rem;
@@ -168,7 +168,7 @@ main {
 
 
 .footer {
-  background-color: #333;
+  background: transparent;
   color: #ff00ff;
   text-align: center;
   padding: 2.5rem;
