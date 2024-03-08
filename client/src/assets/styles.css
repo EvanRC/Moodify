@@ -7,147 +7,180 @@ body {
   #1c193d 0%, 
   #100d29 50%, 
   #1c193d 100%);
-  color: var(--text-color);
-    margin: 0;
-    padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
-      font-family: "Audiowide", sans-serif;
-      font-weight: 400;
-      font-style: normal;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-
  
-  @keyframes glow-animation {
-    0%, 100% {
-      box-shadow:
-        0 0 5px #05f5f5,
-        0 0 15px #05f5f5,
-        0 0 30px #05f5f5,
-        0 0 45px #05f5f5;
-    }
-    50% {
-      box-shadow:
-        0 0 10px #05f5f5,
-        0 0 20px #05f5f5,
-        0 0 35px #05f5f5,
-        0 0 50px #05f5f5;
-    }
-  }
-  
-  .main-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  min-height: 100vh;
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  font-family: "Audiowide", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+ 
+}
+
+
+
+@keyframes glow-animation {
+
+  0%,
+  100% {
+    box-shadow:
+      0 0 5px #05f5f5,
+      0 0 15px #05f5f5,
+      0 0 30px #05f5f5,
+      0 0 45px #05f5f5;
   }
 
-  main {
-    display: flex;
-    color: #55bb47;
-    text-shadow:
+  50% {
+    box-shadow:
+      0 0 10px #05f5f5,
+      0 0 20px #05f5f5,
+      0 0 35px #05f5f5,
+      0 0 50px #05f5f5;
+  }
+}
+
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  padding-bottom: 1.5rem;
+  z-index: 0;   
+
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+}
+
+.main-container {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+}
+
+main {
+
+  display: flex;
+  color: #ff00ff;
+  text-shadow:
     0 0 3px rgba(85, 187, 71, 0.7),
     0 0 6px rgba(85, 187, 71, 0.3),
     0 0 9px rgba(85, 187, 71, 0.1);
-    padding: 1rem;
-    align-items: center;
-    justify-content: center;
-    font-family: "Permanent Marker", cursive;
+  padding: 1rem;
+  align-items: center;
+  justify-content: center;
+  font-family: "Permanent Marker", cursive;
   font-weight: 400;
   font-style: normal;
+  position: relative;
+  
+}
 
-  }
-
-  #main-header {
-    color:  #ff00ff;
-    text-shadow:
+#main-header {
+  color: #ff00ff;
+  text-shadow:
     0 0 4px rgba(200, 200, 200, 0.7),
     0 0 8px rgba(200, 200, 200, 0.5),
     0 0 12px rgba(255, 0, 255, 0.3),
     0 0 16px rgba(255, 0, 255, 0.2),
     0 0 20px rgba(255, 0, 255, 0.1),
     0 0 24px rgba(255, 0, 255, 0.05);
-    font-size: 5rem;
-  }
- 
-  .button-header {
-    font-size: 3rem;
-  }
-
-.navbar {
-    display: flex;
-    justify-content:center;
-    align-items: center;
-    background-color: #333;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    padding-bottom: 1.5rem;
-    
-    
+  font-size: 5rem;
 }
 
-.navbar-logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #fff;
-    text-decoration: none;
+
+
+
+.button-header {
+  font-size: 3rem;
 }
 
 .home-container {
-  box-shadow: 0 0 10px #05f5f5, 0 0 20px #05f5f5, 0 0 30px #05f5f5; /* Glowing effect */
+  box-shadow: 0 0 5px rgba(15, 196, 196, 0.5), 0 0 10px rgba(14, 223, 223, 0.5), 0 0 15px rgba(6, 112, 112, 0.5);
+  /* Glowing effect */
   animation: glow-animation 3s infinite alternate;
   background-color: #040813;
   border: .5rem solid;
   border-radius: 2rem;
-  border-color: #05f5f5;
+  border-color: #0eecec;
   padding: 7rem;
+  position: relative;
 
-  
 }
+
+
 
 .button-container {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+
 }
 
 
 /* Neon button effect */
 .neon-button {
-    padding: 3rem;
-    font-size: 1.5rem; /* Increase font size */
-    font-family: "Orbitron", sans-serif;
+  padding: 3rem;
+  font-size: 1.5rem;
+  /* Increase font size */
+  font-family: "Orbitron", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
-    border: 1px solid #ff00ff;
-    border-radius: 2.5rem;
-    background-color: #040813;
-    color: #55bb47;
-    text-shadow:
+  border: 1px solid #ff00ff;
+  border-radius: 2.5rem;
+  background-color: #040813;
+  color: #55bb47;
+  text-shadow:
     0 0 3px rgba(85, 187, 71, 0.7),
     0 0 6px rgba(85, 187, 71, 0.3),
     0 0 9px rgba(85, 187, 71, 0.1);
-    box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px#ff00ff; /* Glowing effect */
-    transition: all 0.3s ease;
-    cursor: pointer; /* Changes the cursor to a pointer to indicate it's clickable */
-  }
-
-  .neon-button:hover {
-    box-shadow:
-      0 0 5px #c8c8c8,
-      0 0 10px #c8c8c8,
-      0 0 15px #ff00ff,
-      0 0 20px #ff00ff;
-  }
-
-
-  .footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 1rem 0;
+  box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px#ff00ff;
+  /* Glowing effect */
+  transition: all 0.3s ease;
+  cursor: pointer;
+  /* Changes the cursor to a pointer to indicate it's clickable */
 }
+
+.neon-button:hover {
+  box-shadow:
+    0 0 5px #c8c8c8,
+    0 0 10px #c8c8c8,
+    0 0 15px #ff00ff,
+    0 0 20px #ff00ff;
+}
+
+
+.footer {
+  background-color: #333;
+  color: #ff00ff;
+  text-align: center;
+  padding: 2.5rem;
+  
+}
+
+#tsparticles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
