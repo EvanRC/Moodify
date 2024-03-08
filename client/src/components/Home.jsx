@@ -1,16 +1,24 @@
-import React from 'react';
-import LoginBtn from './LoginBtn'; 
-import Layout from './layout';
-import Menu from './Menu'
+// client/src/components/Home.jsx
+import React from 'react'
+import { Link } from 'react-router-dom'
+import Layout from './Layout'
 
 const Home = () => {
   return (
-    
-    <div className="home-container">
-      <h1 className='button-header'>Login with spotify to get Started!</h1>
-      <LoginBtn />
-    </div>
-  );
-};
+    <Layout>
+      <div className="home-container">
+        <h1 className="button-header">Welcome to Moodify!</h1>
+        <div className="button-container">
+          <Link to="/signup" className="neon-button">
+            Sign Up
+          </Link>
+          <Link to="/login" className="neon-button">
+            Login
+          </Link>
+        </div>
+      </div>
+    </Layout>
+  )
+}
 
-export default Home;
+export default Home
