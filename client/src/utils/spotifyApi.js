@@ -27,3 +27,14 @@ export const fetchSongsByGenre = async (genre, accessToken) => {
       throw error; // Re-throw the error for handling by the caller
     }
   };
+
+  export async function fetchHappySongs(accessToken) {
+    const response = await fetch('https://api.spotify.com/v1/recommendations?limit=10&market=US&min_energy=0.7&min_valence=0.7', {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`
+      }
+    });
+    const data = await response.json();
+    return data.tracks;
+  }
+

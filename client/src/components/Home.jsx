@@ -1,7 +1,7 @@
 // client/src/components/Home.jsx
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Layout from './Layout'
+import Layout from './layout'
 
 const Home = () => {
   return (
