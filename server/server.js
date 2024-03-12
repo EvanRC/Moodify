@@ -102,6 +102,12 @@ app.post('/api/exchange-token', async (req, res) => {
   const redirectUri = process.env.SPOTIFY_REDIRECT_URI
   const codeVerifier = req.body.code_verifier
 
+  console.log('spotClientID ' + clientId)
+  console.log('spotcode ' + code)
+  console.log('spotclientsecret ' + clientSecret)
+  console.log('spotRedirURI ' + redirectUri)
+  console.log('spotcodeverifier ' + codeVerifier)
+
   const formData = new URLSearchParams()
   formData.append('grant_type', 'authorization_code')
   formData.append('code', code)
