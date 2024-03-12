@@ -7,7 +7,7 @@ import Signup from './components/Signup'
 import Home from './components/Home'
 import Callback from './components/Callback'
 import Menu from './components/Menu'
-import Layout from './components/Layout'
+import Layout from './components/layout'
 import './assets/styles.css'
 
 const client = new ApolloClient({
