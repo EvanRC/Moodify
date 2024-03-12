@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { fetchSongsByGenre } from '../utils/spotifyApi';
+import { generateMusicSuggestion } from '../utils/openAiApi'; // Import the function to generate music suggestions
+import { fetchSongsBySearchTerm } from '../utils/spotifyApi';
 import WebPlayback from './WebPlayback';
 
 const Menu = () => {
@@ -9,6 +10,7 @@ const Menu = () => {
     const [error, setError] = useState(null);
     const [currentTrackUri, setCurrentTrackUri] = useState(null);
     const [currentSongIndex, setCurrentSongIndex] = useState(0);
+    const [mood, setMood] = useState(''); // State to hold the mood input
 
     const accessToken = localStorage.getItem('spotifyAccessToken');
 
@@ -17,7 +19,7 @@ const Menu = () => {
         setLoading(true);
         setError(null);
         try {
-          const fetchedSongs = await fetchSongsByGenre(genre, accessToken, 'US');
+          const fetchedSongs = await fetchSongsBySearchTerm(searchTerm, accessToken, market = 'US');
           const popularSongs = fetchedSongs.filter(song => song.popularity >= 10);
           console.log(popularSongs)
           setSongs(popularSongs);
@@ -61,14 +63,53 @@ const Menu = () => {
             setCurrentSongIndex(currentSongIndex - 1);
         }
     };
+    const handleMoodChange = async (event) => {
+      setMood(event.target.value);
+    };
+    // Function to handl mood submission and fetching songs by mood
+    const handleMoodSubmit = async () => {
+      if (!mood) return;
+
+      try {
+          setLoading(true);
+          setError(null);
+          
+          // Get music suggestion from OpenAI based on mood
+          const suggestion = await generateMusicSuggestion(mood);
+          const searchTerm = suggestion; // Here, you extract the relevant search term from the suggestion
+
+          // Fetch songs from Spotify based on the OpenAI suggestion
+          const fetchedSongs = await fetchSongsBySearchTerm(searchTerm, accessToken);
+          // Assuming fetchSongsBySearchTerm is correctly implemented to handle searchTerm
+          setSongs(fetchedSongs);
+          setCurrentSongIndex(0);
+          if (fetchedSongs.length > 0) {
+              setCurrentTrackUri(fetchedSongs[0].uri);
+          }
+      } catch (error) {
+          setError(error.message);
+      } finally {
+          setLoading(false);
+      }
+  };
 
     return (
       <div className='home-container'>
-        <h1 className='button-header'>Choose a Genre</h1>
+          <h1 className='button-header'>Choose a Genre or Enter a Mood</h1>
+          <input
+              id="mood-input"
+              type="text"
+              placeholder="Enter mood (e.g., happy, sad, energized...)"
+              value={mood}
+              onChange={handleMoodChange} // Handle changes in the mood input
+          />
+          
+          {/* Button to submit mood */}
+          <button onClick={handleMoodSubmit}>Submit Mood</button>
+
+    <div className="select-container">
         <select className="neon-button" value={genre} onChange={handleGenreChange}>
-          <option value="">Select Genre</option>
-          <option value="Classic Rock">Classic Rock</option>
-          <option value="Classic Rock">Classic Rock</option>
+        <option value="Classic Rock">Classic Rock</option>
           <option value="Country">Country</option>
           <option value="Rap">Rap</option>
           <option value="Punk">Punk</option>
@@ -79,9 +120,11 @@ const Menu = () => {
           <option value="Reggae">Reggae</option>
           <option value="EDM">EDM</option>
         </select>
-
+    </div>
+    <div className="control-buttons">
         <button onClick={handlePreviousSong}>Previous</button>
         <button onClick={handleNextSong}>Next</button>
+    </div>
 
         <WebPlayback accessToken={accessToken} trackUri={currentTrackUri} />
 

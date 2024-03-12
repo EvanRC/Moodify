@@ -166,6 +166,10 @@ main {
     0 0 20px #ff00ff;
 }
 
+#mood-input {
+  margin-top: 10rem;
+}
+
 
 .footer {
   background: transparent;
