@@ -1,6 +1,6 @@
 import React from 'react'
 import LoginBtn from './LoginBtn'
-import Layout from './Layout'
+import Layout from './layout'
 import Menu from './Menu'
 
 const Home = () => {
