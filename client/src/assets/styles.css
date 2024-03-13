@@ -103,7 +103,9 @@ main {
   font-size: 5rem;
 }
 
-
+#mood-input {
+  margin-bottom: 5rem;
+}
 
 
 .button-header {
@@ -156,6 +158,9 @@ main {
   transition: all 0.3s ease;
   cursor: pointer;
   /* Changes the cursor to a pointer to indicate it's clickable */
+  margin-bottom:  3rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 .neon-button:hover {
@@ -164,6 +169,10 @@ main {
     0 0 10px #c8c8c8,
     0 0 15px #ff00ff,
     0 0 20px #ff00ff;
+}
+
+#mood-input {
+  margin-top: 10rem;
 }
 
 
