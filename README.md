@@ -1,65 +1,45 @@
 # Moodify
 
+## License Badge: [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Description
+
 Moodify is a web-based application that integrates Spotify's robust music library with advanced AI algorithms to provide personalized music recommendations. Designed to understand and match user moods and preferences, Moodify offers a unique, intuitive, and engaging way to discover music.
 
-## Features
+## Table of Contents
 
-- **User Authentication:** Secure Spotify account login to access personalized music data.
-- **Natural Language Processing:** AI-powered analysis of user input to determine music preferences based on mood, genre, and more.
-- **Personalized Recommendations:** Tailored music suggestions including songs and playlists from Spotify.
-- **Responsive Design:** A seamless experience on various devices and screen sizes.
+- [Installations](#installations)
+- [Usage](#usage)
+- [Credits](#credits)
+- [license](#license)
 
-## Getting Started
+## Installation
 
-### Prerequisites
-
-- Node.js and npm (Node Package Manager)
-- Spotify Developer account for API access
-- Access to an AI API service (e.g., OpenAI GPT-3, IBM Watson)
-
-### Installation
-
-1. **Clone the repository:**
-2. **Navigate to the project directory:**
-3. **Install dependencies:**
-
-   ### Configuration
-
-1. **Set up your Spotify API credentials:**
-- Create a `.env` file in the project root.
-- Add your Spotify Client ID and Client Secret:
-  ```
-  REACT_APP_SPOTIFY_CLIENT_ID=your_spotify_client_id
-  REACT_APP_SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
-  ```
-
-2. **Configure the AI API:**
-- Add the AI API key to the `.env` file (if required by the AI service being used).
-
-### Running the Application
-
-1. **Start the server:**
-npm start
-
-2. **Access the application in your browser:**
-- Open `http://localhost:3000`
+Just go to the website and create an account.
+Website Link: 
+https://moodify-s7yr.onrender.com/
 
 ## Usage
 
-- Log in with your Spotify account.
-- Enter a mood, activity, or genre in the provided input field.
-- Moodify will use AI to analyze your input and return a selection of songs or playlists that match your mood.
+Create an account with moodify. Then link your Moodify account with your Spotify Prememium account. Note: Only Spotify premium accounts work with Moodify. 
 
-## Contributing
+## Credits
 
-Contributions to Moodify are welcome! Please read our [Contributing Guidelines](CONTRIBUTING.md) for more information on how to contribute.
+Clayten Hensley, John Curtis
+
+## Website Screenshot:
+![image](https://github.com/EvanRC/Moodify/assets/124648885/33a109a2-3667-43da-9d85-ebeb45397161)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
-## Acknowledgments
+        (https://opensource.org/licenses/MIT)
 
-- Spotify API for providing music data.
-- [AI API Name] for AI-powered analysis capabilities.
-- Clayton Hensley, Nicole Neary, Evan Carlson, John Curtis
+        The license used for this application is: mit license. 
+        Click on the link above for more information.
+
+## Questions?
+
+[EvanRC](https://github.com/EvanRC)
+
+
