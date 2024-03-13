@@ -8,8 +8,9 @@ const { ApolloServer, gql } = require('apollo-server-express')
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-
 const User = require('./schemas/User')
+const openAIKey = process.env.OPENAI_API_KEY;
+
 
 const typeDefs = gql`
   type User {
@@ -200,6 +201,36 @@ app.post('/api/start-playback', async (req, res) => {
       .json({ error: 'Internal Server Error', message: error.message })
   }
 })
+
+app.post('/api/generate-music-suggestion', async (req, res) => {
+  try {
+    const mood = req.body.mood;
+    const response = await axios.post(
+      'https://api.openai.com/v1/completions',
+      {
+        model: 'gpt-3.5-turbo-instruct', // or any other model
+        prompt: `Suggest a playlist for a mood: ${ mood }. Provide genres, artists, or song titles.`,
+        temperature: 0.7,
+        max_tokens: 100,
+        top_p: 1.0,
+        frequency_penalty: 0.0,
+        presence_penalty: 0.0,
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${openAIKey}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    // Forward the OpenAI API response back to the client
+    res.json(response.data);
+  } catch (error) {
+    console.error('Error calling OpenAI API:', error.response ? error.response.data : error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/dist')))

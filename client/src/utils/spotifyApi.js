@@ -7,15 +7,22 @@
  */
 
 
-export const fetchSongsBySearchTerm = async (searchTerm, accessToken, market = 'US') => {
+export const fetchSongsBySearchTerm = async (searchTerm, accessToken, market = 'US', searchType = 'genre') => {
   if (!accessToken) {
     throw new Error("Access token is required for Spotify API requests.");
   }
+  const limit = 10;
+  let query;
+  if (searchType === 'genre') {
+    // If it's a genre, use the genre-specific search syntax Spotify supports
+    query = `genre:"${encodeURIComponent(searchTerm)}"`;
+  } else {
+    // Otherwise, use the searchTerm as is for mood-based or other searches
+    query = encodeURIComponent(searchTerm);
+  }
 
   try {
-    // Replace 'genre' with the searchTerm in the query.
-    // You may also remove the 'genre:' prefix if the search term may not always represent a genre.
-    const response = await fetch(`https://api.spotify.com/v1/search?type=track&q=${encodeURIComponent(searchTerm)}&market=${market}&limit=10`, {
+    const response = await fetch(`https://api.spotify.com/v1/search?type=track&q=${query}&market=${market}&limit=${limit}`, {
       headers: {
         'Authorization': `Bearer ${accessToken}`
       }
@@ -32,14 +39,13 @@ export const fetchSongsBySearchTerm = async (searchTerm, accessToken, market = '
     throw error; // Re-throw the error for handling by the caller
   }
 };
-
-  export async function fetchHappySongs(accessToken) {
-    const response = await fetch('https://api.spotify.com/v1/recommendations?limit=10&market=US&min_energy=0.7&min_valence=0.7', {
-      headers: {
-        'Authorization': `Bearer ${accessToken}`
-      }
-    });
-    const data = await response.json();
-    return data.tracks;
-  }
+  // export async function fetchHappySongs(accessToken) {
+  //   const response = await fetch('https://api.spotify.com/v1/recommendations?limit=10&market=US&min_energy=0.7&min_valence=0.7', {
+  //     headers: {
+  //       'Authorization': `Bearer ${accessToken}`
+  //     }
+  //   });
+  //   const data = await response.json();
+  //   return data.tracks;
+  // }
 
