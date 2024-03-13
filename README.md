@@ -25,7 +25,9 @@ Create an account with moodify. Then link your Moodify account with your Spotify
 
 ## Credits
 
-Clayten Hensley, John Curtis
+[Clayton Hensley](https://github.com/chensley8)
+[Evan Carlson](https://github.com/EvanRC)
+[John Curtis](https://github.com/t4-k1)
 
 ## Website Screenshot:
 ![image](https://github.com/EvanRC/Moodify/assets/124648885/33a109a2-3667-43da-9d85-ebeb45397161)
